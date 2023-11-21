@@ -179,7 +179,9 @@ public class KeycloakOAuthFactory {
         try {
             URIBuilder builder = new URIBuilder(issuerServer);
 
-            List<String> pathSegments = Stream.of(builder.getPath(), "realms", realmName)
+            String path = "/auth".equalsIgnoreCase(builder.getPath()) ?  "auth" : "";
+
+            List<String> pathSegments = Stream.of(path, "realms", realmName)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
